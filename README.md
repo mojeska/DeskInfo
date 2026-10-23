@@ -1,5 +1,7 @@
 # DeskInfo
 
+[![CI](https://github.com/mojeska/DeskInfo/actions/workflows/ci.yml/badge.svg)](https://github.com/mojeska/DeskInfo/actions/workflows/ci.yml)
+
 A BGInfo-style wallpaper. It draws computer name, server role (DC, Veeam, DNS, DHCP, CA, IIS, Hyper-V, SQL), OS and build, install date, last patch, pending reboot, IPs, gateway, DNS, CPU, memory, disks, boot time and uptime in the top-right corner, and it can be deployed to remote servers over WinRM. Plain PowerShell: no install, no compiled binary.
 
 ## Deploy
@@ -78,3 +80,11 @@ To add, remove or reorder fields, edit the `[ordered]@{ ... }` table at the end 
 - A PowerShell window may flash briefly at sign-in.
 - After `-Uninstall`, users who weren't signed in keep the last generated wallpaper until they change it.
 - Group Policy wallpaper settings override this.
+
+## Tests
+
+Run the Pester tests (Pester 5+ and PSScriptAnalyzer). CI runs them on a Windows runner on every push:
+
+```powershell
+Invoke-Pester -Path .\Tests -Output Detailed
+```

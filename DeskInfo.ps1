@@ -226,8 +226,14 @@ function New-DeskInfoImage {
 
     [void][DeskInfoNative]::SetProcessDPIAware()   # real pixels, not DPI-scaled ones
     $screen = [System.Windows.Forms.Screen]::PrimaryScreen
-    $bounds = $screen.Bounds
-    $work   = $screen.WorkingArea                  # excludes the taskbar, wherever it is
+    if ($screen) {
+        $bounds = $screen.Bounds
+        $work   = $screen.WorkingArea              # excludes the taskbar, wherever it is
+    } else {
+        # No display (service session, CI runner): draw at 1080p so -NoApply still works.
+        $bounds = New-Object System.Drawing.Rectangle 0, 0, 1920, 1080
+        $work   = $bounds
+    }
     $W = $bounds.Width
     $H = $bounds.Height
 
@@ -335,6 +341,9 @@ function New-DeskInfoImage {
         $bmp.Dispose()
     }
 }
+
+# Dot-sourcing (". .\DeskInfo.ps1") loads the functions without running anything. The tests use this.
+if ($MyInvocation.InvocationName -eq '.') { return }
 
 try {
     if ($Restore) {
