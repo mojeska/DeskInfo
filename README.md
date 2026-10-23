@@ -4,6 +4,13 @@
 
 A BGInfo-style wallpaper. It draws computer name, server role (DC, Veeam, DNS, DHCP, CA, IIS, Hyper-V, SQL), OS and build, install date, last patch, pending reboot, IPs, gateway, DNS, CPU, memory, disks, boot time and uptime in the top-right corner, and it can be deployed to remote servers over WinRM. Plain PowerShell: no install, no compiled binary.
 
+## Disclaimer
+
+> [!WARNING]
+> **Use at your own risk.** These scripts are provided as-is, with no warranty or guarantee of any kind. The author accepts no liability for any damage, data loss, downtime or other problems that result from using them.
+>
+> Read and understand anything before you run it, do your own research, and test in a lab before using it in production. See the [MIT License](LICENSE) for the full terms.
+
 ## Deploy
 
 Install on remote servers (local admin on the targets; WinRM is on by default on Windows Server):
